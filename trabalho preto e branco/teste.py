@@ -9,7 +9,7 @@ from tkinter import *
 
 from tkinter import filedialog
 from tkinter.filedialog import askopenfile
-from PIL import Image, ImageTk
+
 
 
 def select_img():
