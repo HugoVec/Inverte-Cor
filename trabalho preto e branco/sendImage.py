@@ -69,10 +69,10 @@ def enviaImagem():
         _quit()
 
         #retorno da imagem binarizada
-        retorno1, imagemBinaria = cv2.threshold(img, limiar, 255, cv2.THRESH_BINARY_INV)
+        #retorno1, imagemBinaria = cv2.threshold(img, limiar, 255, cv2.THRESH_BINARY_INV)
         
         #retorno do histograma
-        retorno2, histograma = cv2.threshold(img, limiar, 255, cv2.THRESH_BINARY_INV)
+        #retorno2, histograma = cv2.threshold(img, limiar, 255, cv2.THRESH_BINARY_INV)
 
         #blur tira ruidos da imagem
         blur = cv2.GaussianBlur(img, (5, 5), 0)
@@ -81,7 +81,7 @@ def enviaImagem():
         retorno3, imagemCinza = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
         #array com os dados das imagens
-        images = [img, 0, imagemBinaria, img, 0, histograma, blur, 0, imagemCinza]
+        #images = [img, 0, imagemBinaria, img, 0, histograma, blur, 0, imagemCinza]
         
         #botão salvar da aplicação plt
         mpl.backend_bases.NavigationToolbar2.toolitems = (
@@ -94,15 +94,15 @@ def enviaImagem():
         #Apresentação
 
         #imagem cinza
-        plt.subplot(3, 2, 0 * 3 + 1), plt.imshow(images[0 * 3], 'gray')
+        plt.subplot(3, 2, 0 * 3 + 1), plt.imshow(img, 'gray')
         plt.title('Imagem cinza'), plt.xticks([]), plt.yticks([])
         
         #histograma
-        plt.subplot(2, 2, 0 * 3 + 2), plt.hist(images[0 * 3].ravel(), 256,[0,256])
+        plt.subplot(2, 2, 0 * 3 + 2), plt.hist(img.ravel(), 256,[0,256])
         plt.title('Histograma'), plt.xticks([]), plt.yticks([])
 
         #imagem binarizada
-        plt.subplot(3, 2, 0 * 3 + 3), plt.imshow(images[0 * 3 + 2], 'gray')
+        plt.subplot(3, 2, 0 * 3 + 3), plt.imshow(imagemCinza, 'gray')
         plt.title('Imagem Binarizada'), plt.xticks([]), plt.yticks([])
         
         #mostra as imagens
