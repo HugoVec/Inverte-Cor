@@ -37,30 +37,6 @@ def enviaImagem():
 
         #dados da imagem
         image = cv2.imread(local, 0)
-        
-        #calculo treshold
-        numero = 256
-
-        #Histograma
-        histograma, bordas = np.histogram(image, bins=numero)
-
-        #Media das bordas
-        media = (bordas[:-1] + bordas[1:]) / 2.
-        
-        #Peso histograma
-        pesoHist1 = np.cumsum(histograma)
-        pesoHist2 = np.cumsum(histograma[::-1])[::-1]
-        
-        #Variancia
-        mediaVar1 = np.cumsum(histograma * media) / pesoHist1
-        mediaVar2 = (np.cumsum((histograma * media)[::-1]) / pesoHist2[::-1])[::-1]
-        variancia = pesoHist1[:-1] * pesoHist2[1:] * (mediaVar1[:-1] - mediaVar2[1:]) ** 2
-        
-        #Valor maximo
-        valorMaximo = np.argmax(variancia)
-        
-        #resultado do limiar
-        limiar = media[:-1][valorMaximo]
 
         #dados da imagem a partid do caminho
         img = cv2.imread(destination, 0)
@@ -68,20 +44,11 @@ def enviaImagem():
         #fecha o tinker que requere a imagem
         _quit()
 
-        #retorno da imagem binarizada
-        #retorno1, imagemBinaria = cv2.threshold(img, limiar, 255, cv2.THRESH_BINARY_INV)
-        
-        #retorno do histograma
-        #retorno2, histograma = cv2.threshold(img, limiar, 255, cv2.THRESH_BINARY_INV)
-
         #blur tira ruidos da imagem
         blur = cv2.GaussianBlur(img, (5, 5), 0)
 
         #retorno da imagem cinza
         retorno3, imagemCinza = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-
-        #array com os dados das imagens
-        #images = [img, 0, imagemBinaria, img, 0, histograma, blur, 0, imagemCinza]
         
         #botão salvar da aplicação plt
         mpl.backend_bases.NavigationToolbar2.toolitems = (
@@ -90,8 +57,6 @@ def enviaImagem():
         
         #titulo da aplicação plt
         plt.figure('Projeto - Limiarização')
-
-        #Apresentação
 
         #imagem cinza
         plt.subplot(3, 2, 0 * 3 + 1), plt.imshow(img, 'gray')
