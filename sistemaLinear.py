@@ -1,9 +1,5 @@
 #Feito por: 
 #Rafael Bassan D9614F1
-#Breno Santos F03BBI1
-#Eliseu Pereira Lopes Junior T4340D7
-#Hugo Savioli D86FFE9
-#Gustavo Duzzi D97CEB8
 
 import csv
 import numpy as np
@@ -71,10 +67,13 @@ def contagem():
         i=i+1 
   
     conta = np.linalg.solve(v, b)
+    texto = "Resultado: " + str(conta)
 
-    print(conta)
-
-
+    description = tk.Label(top, text=texto, relief=FLAT)
+    description.pack()
+    
+    #print(conta)
+    #label informativo
 
 #função fechar a aplicação
 def _quit():
@@ -84,14 +83,15 @@ def _quit():
 #botão sair                    
 quit = tk.Button(master=top, text="Sair", command=_quit, height=1, width=30,  bg='#DC143C', fg='white')
 
-#label informativo
 description = tk.Label(top, text='', relief=FLAT)
+
+
 
 #botao enviar dados
 button = tk.Button(top, text ="Enviar", command = contagem, height=1, width=30,   bg='#006400', fg='white')
-
+description.pack()
 #apresentação tinker
 quit.pack(side=tk.BOTTOM)
-description.pack()
+
 button.pack()
 top.mainloop()
