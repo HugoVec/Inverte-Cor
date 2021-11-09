@@ -3,7 +3,9 @@ import numpy as np
 import tkinter as tk
 from tkinter import *
 from tkinter import filedialog
-import os
+import numpy as np
+import pandas as pd
+import re
 
 #variaveis
 top = tk.Tk(className='Projeto - Sistema Linear')
@@ -23,7 +25,7 @@ def enviaImagem():
     c = len(next(reader))
 
     l = sum(1 for itens in reader)
-    l = l
+    l = l + 1
     
   
     #print(reader)
@@ -35,12 +37,6 @@ def enviaImagem():
                         unpack=True,
                         dtype='str')
 
-
-    linhas = csv.reader(arquivo)
-
-    for linha in linhas:
-        print(linha)
-
     i=0
     x=0
     b = []
@@ -48,17 +44,24 @@ def enviaImagem():
     while i < c:
         while x < l:
             if(i + 1 == c):
-                
-                b.append(int(valor[i][x]))
-                #print('caralho:',valor[i][x])
+                u = valor[i][x]
+                u = re.sub('[^0-9-]', '', u)  
+                b.append(int(u))
             else:
-                a.append(int(valor[i][x]))
-                print(valor[i][x])
+                u = valor[i][x]
+                u = re.sub('[^0-9-]', '', u)             
+                a.append(int(u))
             x=x+1
         x=0
         i=i+1
+
     print(b)
     print(a)
+    conta = np.linalg.solve(a, b)
+
+    print(conta)
+
+
 
 #função fechar a aplicação
 def _quit():
