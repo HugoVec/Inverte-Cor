@@ -39,25 +39,32 @@ def enviaImagem():
 
     i=0
     x=0
+
     b = []
     a = []
-    while i < c:
-        while x < l:
-            if(i + 1 == c):
-                u = valor[i][x]
+    v = []
+    
+    while i < l:
+        while x < c:
+            if(x + 1 == c):
+                u = valor[x][i]
                 u = re.sub('[^0-9-]', '', u)  
                 b.append(int(u))
             else:
-                u = valor[i][x]
+                u = valor[x][i]
                 u = re.sub('[^0-9-]', '', u)             
                 a.append(int(u))
-            x=x+1
-        x=0
-        i=i+1
+                
+            if(x + 1 == c):
+                v.append(a) 
 
-    print(b)
-    print(a)
-    conta = np.linalg.solve(a, b)
+            x=x+1
+        
+        a = [] 
+        x=0
+        i=i+1 
+  
+    conta = np.linalg.solve(v, b)
 
     print(conta)
 
